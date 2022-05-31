@@ -4,3 +4,17 @@ server:
 spring:
   application:
     name: element
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.format_sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/elements
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
