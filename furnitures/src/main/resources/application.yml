@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
-    name: elementandmaterial
+    name: furnitures
 
   jpa:
     database: POSTGRESQL
@@ -15,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: 'true'
   datasource:
-    url: jdbc:postgresql://localhost:5432/elements_and_materials
+    url: jdbc:postgresql://localhost:5432/furnitures
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver

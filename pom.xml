@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>elementandmaterial</module>
+        <module>furnitures</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
