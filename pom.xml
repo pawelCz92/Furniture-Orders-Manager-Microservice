@@ -4,8 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>elementandmaterial</module>
-        <module>furnitures</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
