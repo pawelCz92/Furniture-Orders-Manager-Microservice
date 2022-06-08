@@ -1,25 +1,16 @@
 package com.pawel.furniturewithcomponentsrepository.domain.element.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "elements")
+@Document(collection = "elements")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,8 +19,7 @@ import javax.persistence.Table;
 public class Element {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private int length = 0;
     private int height = 0;
@@ -37,13 +27,9 @@ public class Element {
     private String suffix;
     private String description;
 
-    @Setter
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "material_id")
     private Material material;
 
-    @ManyToOne(cascade = CascadeType.DETACH)// TODO (fetch = FetchType.LAZY)
-    private Furniture furniture;
+    private String furnitureName;
 
 
     public String toShortString() {
@@ -60,7 +46,7 @@ public class Element {
     public String toString() {
         return "Element{" +
                 "id=" + id +
-                ", furniture=" + furniture.getName() +
+                ", furniture=" + furnitureName +
                 ", material=" + material.getName() +
                 ", length=" + length +
                 ", height=" + height +

@@ -6,23 +6,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "furniture")
+
+@Document(collection = "furniture")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -31,18 +23,10 @@ import java.util.Set;
 public class Furniture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(unique = true)
     private String name;
     private String description;
-
-    @ToString.Exclude
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinTable(name = "furniture_and_configurations",
-            joinColumns = @JoinColumn(name = "furniture_id"),
-            inverseJoinColumns = @JoinColumn(name = "configuration_id"))
     private Set<Configuration> configurations;
 
 

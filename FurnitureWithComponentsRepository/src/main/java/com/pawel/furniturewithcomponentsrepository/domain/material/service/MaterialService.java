@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +17,7 @@ public class MaterialService {
 
     private final MaterialRepo repo;
 
-    @Transactional
+
     public void save(Material material) {
         if (findMaterialByName(material.getName()).isPresent()) {
             String message = "Material with name: " + material.getName() + " already exists.";
@@ -38,7 +37,7 @@ public class MaterialService {
         return repo.findByName(name);
     }
 
-    public Optional<Material> findMaterialById(Long id) {
+    public Optional<Material> findMaterialById(String id) {
         return repo.findById(id);
     }
 }

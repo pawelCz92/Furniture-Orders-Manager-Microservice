@@ -7,24 +7,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "configurations")
+
+@Document(collection = "configurations")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,21 +24,11 @@ import java.util.Set;
 public class Configuration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String id;
     private String name;
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "furniture_id")
     private Furniture furniture;
-
     @ToString.Exclude
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinTable(name = "configurations_and_parts_quantities",
-            joinColumns = @JoinColumn(name = "configuration_id"),
-            inverseJoinColumns = @JoinColumn(name = "part_quantity_id"))
     private Set<PartQuantity> partAndQuantities;
 
     public void addAllPartsQuantities(Set<PartQuantity> partAndQuantities) {

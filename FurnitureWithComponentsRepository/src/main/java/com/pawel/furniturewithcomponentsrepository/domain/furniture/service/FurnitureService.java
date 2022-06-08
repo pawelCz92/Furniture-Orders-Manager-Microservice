@@ -32,7 +32,7 @@ public class FurnitureService {
         return repo.findByName(name);
     }
 
-    public Optional<Furniture> findFurnitureById(Long id) {
+    public Optional<Furniture> findFurnitureById(String id) {
         return repo.findById(id);
     }
 

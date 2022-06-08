@@ -7,8 +7,6 @@ import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
 import com.pawel.furniturewithcomponentsrepository.domain.element.service.ElementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.TransientObjectException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +39,7 @@ public class ElementController {
                 .suffix(request.getSuffix())
                 .description(request.getDescription())
                 .build();
-        service.save(elementDto);
+    //TODO    service.save(elementDto);
     }
 
     @GetMapping
@@ -54,20 +52,6 @@ public class ElementController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ElementAlreadyExistsException.class)
     public String handle(ElementAlreadyExistsException ex) {
-        log.error(ex.getMessage());
-        return ex.getMessage();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public String handle(ConstraintViolationException ex) {
-        log.error(ex.getMessage());
-        return ex.getCause().getMessage();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(TransientObjectException.class)
-    public String handle(TransientObjectException ex) {
         log.error(ex.getMessage());
         return ex.getMessage();
     }
