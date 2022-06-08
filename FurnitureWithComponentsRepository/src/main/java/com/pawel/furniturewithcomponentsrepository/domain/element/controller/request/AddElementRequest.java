@@ -25,8 +25,10 @@ public class AddElementRequest {
     private String suffix;
     private String description;
     @NotNull
+    @Min(value = 1, message = "Material Id must not be less than 1")
     private Long materialId;
     @NotNull
+    @Min(value = 1, message = "Furniture Id must not be less than 1")
     private Long furnitureId;
 
 }

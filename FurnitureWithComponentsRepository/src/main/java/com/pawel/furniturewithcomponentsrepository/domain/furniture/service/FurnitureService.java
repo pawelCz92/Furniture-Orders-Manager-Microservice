@@ -1,8 +1,8 @@
-package com.pawel.furniturewithcomponentsrepository.domain.furnitures.service;
+package com.pawel.furniturewithcomponentsrepository.domain.furniture.service;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.db.FurnitureRepo;
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.exceptions.FurnitureAlreadyExistsException;
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.db.FurnitureRepo;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureAlreadyExistsException;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,14 @@ public class FurnitureService {
     }
 
     private Optional<Furniture> findByName(String name) {
+        return repo.findByName(name);
+    }
+
+    public Optional<Furniture> findFurnitureById(Long id) {
+        return repo.findById(id);
+    }
+
+    public Optional<Furniture> findFurnitureByName(String name) {
         return repo.findByName(name);
     }
 }

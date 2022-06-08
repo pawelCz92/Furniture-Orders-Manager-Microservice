@@ -17,7 +17,7 @@ public class PartController {
 
 
     @PostMapping
-    public String addPart(AddPartRequest request) {
+    public String savePart(AddPartRequest request) {
         Part part = Part.builder()
                 .name(request.getName())
                 .description(request.getDescription())
@@ -26,4 +26,6 @@ public class PartController {
         service.save(part);
         return "Successfully added part.";
     }
+
+    // @PostMapping("/{id}/add-el-q/")
 }

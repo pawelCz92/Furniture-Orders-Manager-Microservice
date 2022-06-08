@@ -1,0 +1,158 @@
+{
+  "furniture": {
+    "id": "-id-",
+    "name": "nazwa",
+    "description": "opis",
+    "configurations": [
+      {
+        "id": "id",
+        // CONFIGURATION
+        "name": "confA",
+        "description": "opisA",
+        "partAndQuantities": [
+          {
+            "part": {
+              "id": "id",
+              "name": "partA",
+              "description": "opisA",
+              "elementQuantities": [
+                {
+                  "element": {
+                    "id": "elAId",
+                    "length": "lengthA",
+                    "height": "heightA",
+                    "thickness": "ThicknessA",
+                    "suffix": "suffA",
+                    "description": "dscrA",
+                    "material": {
+                      "id": "id material",
+                      "name": "matName"
+                    }
+                  },
+                  "quantity": "iloscElA"
+                }
+              ]
+            },
+            "quantity": "iloscPartA"
+          },
+          {
+            "part": {
+              "id": "id",
+              "name": "partA",
+              "description": "opisA",
+              "elementQuantities": [
+                {
+                  "element": {
+                    "id": "elAId",
+                    "length": "lengthA",
+                    "height": "heightA",
+                    "thickness": "ThicknessA",
+                    "suffix": "suffA",
+                    "description": "dscrA",
+                    "material": {
+                      "id": "id material",
+                      "name": "matName"
+                    }
+                  },
+                  "quantity": "iloscElA"
+                }
+              ]
+            },
+            "quantity": "iloscPartA"
+          },
+          {
+            "part": {
+              "id": "id",
+              "name": "partA",
+              "description": "opisA",
+              "elementQuantities": [
+                {
+                  "element": {
+                    "id": "elAId",
+                    "length": "lengthA",
+                    "height": "heightA",
+                    "thickness": "ThicknessA",
+                    "suffix": "suffA",
+                    "description": "dscrA",
+                    "material": {
+                      "id": "id material",
+                      "name": "matName"
+                    }
+                  },
+                  "quantity": "iloscElA"
+                }
+              ]
+            },
+            "quantity": "iloscPartA"
+          }
+        ]
+      },
+      {
+        "id": "id",
+        "name": "confA",
+        "description": "opisA",
+        "partAndQuantities": [
+          {
+            "part": {
+              "id": "id",
+              "name": "partA",
+              "description": "opisA",
+              "elementQuantities": [
+                {
+                  "element": {
+                    "id": "elAId",
+                    "length": "lengthA",
+                    "height": "heightA",
+                    "thickness": "ThicknessA",
+                    "suffix": "suffA",
+                    "description": "dscrA",
+                    "material": {
+                      "id": "id material",
+                      "name": "matName"
+                    }
+                  },
+                  "quantity": "iloscElA"
+                }
+              ]
+            },
+            "quantity": "iloscPartA"
+          }
+        ]
+      },
+      {
+        "id": "id",
+        "name": "confA",
+        "description": "opisA",
+        "partAndQuantities": [
+          {
+            "part": {
+              "id": "id",
+              "name": "partA",
+              "description": "opisA",
+              "elementQuantities": [
+                {
+                  "element": {
+                    "id": "elAId",
+                    "length": "lengthA",
+                    "height": "heightA",
+                    "thickness": "ThicknessA",
+                    "suffix": "suffA",
+                    "description": "dscrA",
+                    "material": {
+                      "id": "id material",
+                      "name": "matName"
+                    }
+                  },
+                  "quantity": "iloscElA"
+                }
+              ]
+            },
+            "quantity": "iloscPartA"
+          }
+        ]
+      },
+      {
+      }
+    ]
+  }
+}

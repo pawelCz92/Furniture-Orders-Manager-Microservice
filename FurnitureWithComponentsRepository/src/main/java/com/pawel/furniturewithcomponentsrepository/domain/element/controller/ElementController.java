@@ -1,5 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.element.controller;
 
+import com.pawel.furniturewithcomponentsrepository.domain.element.controller.dto.ElementDto;
 import com.pawel.furniturewithcomponentsrepository.domain.element.controller.request.AddElementRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.element.exceptions.ElementAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
@@ -9,7 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.TransientObjectException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,15 +32,16 @@ public class ElementController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void saveElement(@Valid @RequestBody AddElementRequest request) {
-        Element element = Element.builder()
+        ElementDto elementDto = ElementDto.builder()
+                .furnitureId(request.getFurnitureId())
+                .materialId(request.getMaterialId())
                 .length(request.getLength())
                 .height(request.getHeight())
                 .thickness(request.getThickness())
                 .suffix(request.getSuffix())
                 .description(request.getDescription())
-                .material(request.getMaterial())
                 .build();
-        service.save(element);
+        service.save(elementDto);
     }
 
     @GetMapping

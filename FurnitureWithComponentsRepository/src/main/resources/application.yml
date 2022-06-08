@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: elementandmaterial
+    name: furnitureWithComponentsRepository
 
   jpa:
     database: POSTGRESQL

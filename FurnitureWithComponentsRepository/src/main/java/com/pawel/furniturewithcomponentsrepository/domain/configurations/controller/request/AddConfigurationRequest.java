@@ -1,6 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.configurations.controller.request;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import com.pawel.furniturewithcomponentsrepository.domain.part.model.PartQuantity;
 import lombok.Data;
 import lombok.NoArgsConstructor;

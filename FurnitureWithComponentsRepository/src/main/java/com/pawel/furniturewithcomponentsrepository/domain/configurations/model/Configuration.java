@@ -1,10 +1,24 @@
 package com.pawel.furniturewithcomponentsrepository.domain.configurations.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import com.pawel.furniturewithcomponentsrepository.domain.part.model.PartQuantity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -26,6 +40,7 @@ public class Configuration {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "furniture_id")
     private Furniture furniture;
 
     @ToString.Exclude

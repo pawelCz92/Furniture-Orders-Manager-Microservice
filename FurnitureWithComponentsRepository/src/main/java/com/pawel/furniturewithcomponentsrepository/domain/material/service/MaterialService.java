@@ -37,4 +37,8 @@ public class MaterialService {
     public Optional<Material> findMaterialByName(String name) {
         return repo.findByName(name);
     }
+
+    public Optional<Material> findMaterialById(Long id) {
+        return repo.findById(id);
+    }
 }

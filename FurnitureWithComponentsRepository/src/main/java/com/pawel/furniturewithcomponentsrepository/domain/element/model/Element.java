@@ -1,10 +1,22 @@
 package com.pawel.furniturewithcomponentsrepository.domain.element.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "elements")
@@ -30,7 +42,7 @@ public class Element {
     @JoinColumn(name = "material_id")
     private Material material;
 
-    @ManyToOne// TODO (fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.DETACH)// TODO (fetch = FetchType.LAZY)
     private Furniture furniture;
 
 

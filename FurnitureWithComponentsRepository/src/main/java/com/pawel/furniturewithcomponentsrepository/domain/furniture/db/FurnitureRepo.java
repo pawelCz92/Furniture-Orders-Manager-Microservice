@@ -1,6 +1,6 @@
-package com.pawel.furniturewithcomponentsrepository.domain.furnitures.db;
+package com.pawel.furniturewithcomponentsrepository.domain.furniture.db;
 
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

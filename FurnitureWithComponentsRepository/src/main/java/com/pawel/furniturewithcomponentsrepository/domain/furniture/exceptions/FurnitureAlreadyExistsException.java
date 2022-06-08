@@ -1,4 +1,4 @@
-package com.pawel.furniturewithcomponentsrepository.domain.furnitures.exceptions;
+package com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions;
 
 public class FurnitureAlreadyExistsException extends RuntimeException {
 

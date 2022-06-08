@@ -1,10 +1,21 @@
 package com.pawel.furniturewithcomponentsrepository.domain.part.model;
 
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.ElementQuantity;
-import com.pawel.furniturewithcomponentsrepository.domain.furnitures.model.Furniture;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +35,11 @@ public class Part {
     private String name;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Furniture furniture;
-
+    @ToString.Exclude
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinTable(name = "parts_and_elements_quantities",
             joinColumns = @JoinColumn(name = "part_id"),
             inverseJoinColumns = @JoinColumn(name = "element_quantity_id"))
-    @ToString.Exclude
     private Set<ElementQuantity> elementQuantities;
 
 
