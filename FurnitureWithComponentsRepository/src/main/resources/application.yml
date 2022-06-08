@@ -4,18 +4,11 @@ server:
 spring:
   application:
     name: furnitureWithComponentsRepository
-
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: 'true'
-  datasource:
-    url: jdbc:postgresql://localhost:5432/furniture_and_components_database
-    username: postgres
-    password: postgres
-    driverClassName: org.postgresql.Driver
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: furnituresWithComponents
+      port: 27017
+      host: localhost
