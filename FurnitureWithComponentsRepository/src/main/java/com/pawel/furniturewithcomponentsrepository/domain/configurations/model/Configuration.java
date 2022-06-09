@@ -15,20 +15,15 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@Document(collection = "configurations")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 public class Configuration {
 
-    @Id
-    private String id;
     private String name;
     private String description;
     private Furniture furniture;
-    @ToString.Exclude
     private Set<PartQuantity> partAndQuantities;
 
     public void addAllPartsQuantities(Set<PartQuantity> partAndQuantities) {

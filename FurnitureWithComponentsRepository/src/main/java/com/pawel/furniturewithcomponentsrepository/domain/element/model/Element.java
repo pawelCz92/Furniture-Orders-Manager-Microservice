@@ -16,14 +16,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class Element {
+public class Element implements Comparable<Element> {
 
     @Id
+    @EqualsAndHashCode.Exclude
     private String id;
 
-    private int length = 0;
-    private int height = 0;
-    private int thickness = 0;
+    private int length;
+    private int height;
+    private int thickness;
     private String suffix;
     private String description;
 
@@ -33,13 +34,13 @@ public class Element {
 
 
     public String toShortString() {
-        String shortDescr = "";
+        String shortDesc = "";
         if (description != null && description.length() >= 10) {
-            shortDescr = description.substring(0, 9).concat("...");
-            shortDescr = " -  ShortDescr: " + shortDescr;
+            shortDesc = description.substring(0, 9).concat("...");
+            shortDesc = " -  ShortDescr: " + shortDesc;
         }
         return String.format("%sx%sx%s %s - %s%s",
-                length, height, thickness, suffix, material.getName(), shortDescr);
+                length, height, thickness, suffix, material.getName(), shortDesc);
     }
 
     @Override
@@ -54,5 +55,25 @@ public class Element {
                 ", suffix='" + suffix + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Element o) {
+        if (!o.getFurnitureName().equals(this.furnitureName)) {
+            return this.furnitureName.compareToIgnoreCase(o.getFurnitureName());
+        }
+        if (!o.getMaterial().getName().equals(this.material.getName())) {
+            return this.material.getName().compareToIgnoreCase(o.getMaterial().getName());
+        }
+        if (o.getLength() != this.length) {
+            return Integer.compare(this.length, o.getLength());
+        }
+        if (o.getHeight() != this.height) {
+            return Integer.compare(this.height, o.getHeight());
+        }
+        if (o.getThickness() != this.thickness) {
+            return Integer.compare(this.thickness, o.getThickness());
+        }
+        return 0;
     }
 }

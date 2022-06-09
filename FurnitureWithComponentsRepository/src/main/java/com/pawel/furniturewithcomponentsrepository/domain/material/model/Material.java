@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Material {
 
     @Id
+    @EqualsAndHashCode.Exclude
     private String id;
     private String name;
 }

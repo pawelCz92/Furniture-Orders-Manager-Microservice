@@ -1,101 +1,44 @@
-id,model,material,length,hight,thickness,suffix
-1,Beta,Wórowa Biała,1016,1204,15,
-2,Beta,Wiórowa,1337,511,15,Z
-3,Alfa,MFP,1269,1076,15,
-4,Beta,MFP,353,1330,15,
-5,Alfa,Wórowa Biała,747,465,15,A
-6,Beta,Wiórowa,672,226,15,Z
-7,Alfa,MFP,1350,849,15,
-8,Alfa,Wiórowa,1439,881,15,B
-9,Beta,Wiórowa,714,352,15,
-10,Alfa,MFP,560,1556,15,A
-11,Alfa,Wiórowa,297,1166,15,
-12,Beta,Wórowa Biała,1211,333,15,
-13,Beta,Wórowa Biała,1182,249,15,A
-14,Beta,Wórowa Biała,1178,871,15,
-15,Beta,Sklejka,451,647,15,
-16,Beta,Sklejka,1173,1454,15,
-17,Beta,Sklejka,728,561,15,B
-18,Alfa,Wiórowa,298,1379,15,
-19,Alfa,MFP,367,1502,15,A
-20,Alfa,Sklejka,1103,1424,15,
-21,Beta,Wiórowa,1503,1268,15,
-22,Beta,MFP,1293,1502,15,
-23,Beta,Wiórowa,453,1252,15,A
-24,Beta,Wórowa Biała,501,1115,15,
-25,Beta,Wórowa Biała,1055,1528,15,
-26,Beta,Wiórowa,520,254,15,
-27,Alfa,Wórowa Biała,1379,616,15,
-28,Alfa,Sklejka,1234,770,15,
-29,Beta,MFP,1133,382,15,
-30,Alfa,MFP,1351,703,15,
-31,Alfa,Sklejka,792,689,15,
-32,Alfa,MFP,471,277,15,
-33,Alfa,Sklejka,361,948,15,
-34,Alfa,Wiórowa,1105,1041,15,A
-35,Beta,Wórowa Biała,278,492,15,
-36,Alfa,Wiórowa,1436,1437,15,
-37,Alfa,Sklejka,1504,588,15,Z
-38,Alfa,Sklejka,434,650,15,
-39,Beta,Sklejka,1485,363,15,
-40,Beta,Sklejka,1152,1362,15,Z
-41,Alfa,Wiórowa,721,284,15,Z
-42,Alfa,Wiórowa,848,1242,15,
-43,Beta,Wórowa Biała,1208,1274,15,
-44,Beta,Wiórowa,1284,857,15,
-45,Alfa,Sklejka,1546,1013,15,
-46,Beta,MFP,1061,1551,15,
-47,Beta,Wiórowa,1274,730,15,B
-48,Alfa,MFP,1591,212,15,
-49,Beta,Wórowa Biała,399,1148,15,A
-50,Beta,MFP,1128,1196,15,
-51,Beta,Sklejka,1452,1088,15,
-52,Alfa,Wórowa Biała,713,1521,15,
-53,Alfa,Wórowa Biała,785,739,15,
-54,Alfa,Wiórowa,1215,352,15,
-55,Beta,Wórowa Biała,281,682,15,B
-56,Beta,Wiórowa,517,690,15,
-57,Beta,Wórowa Biała,233,514,15,
-58,Alfa,MFP,478,875,15,A
-59,Alfa,MFP,816,1478,15,
-60,Alfa,Sklejka,820,438,15,A
-61,Alfa,Wiórowa,1176,1493,15,
-62,Alfa,Sklejka,1213,845,15,
-63,Beta,Sklejka,978,684,15,
-64,Alfa,MFP,1231,633,15,
-65,Alfa,MFP,796,1329,15,
-66,Alfa,Sklejka,404,1225,15,
-67,Beta,Sklejka,504,1544,15,
-68,Beta,Wórowa Biała,732,884,15,Z
-69,Alfa,Wórowa Biała,778,1165,15,B
-70,Beta,MFP,1201,1112,15,
-71,Beta,MFP,943,1044,15,
-72,Alfa,Sklejka,326,1359,15,Z
-73,Alfa,Sklejka,772,1079,15,
-74,Beta,MFP,877,847,15,
-75,Alfa,Wórowa Biała,830,481,15,
-76,Beta,Wórowa Biała,1391,358,15,B
-77,Beta,Wiórowa,527,1330,15,
-78,Beta,MFP,1484,768,15,
-79,Alfa,Sklejka,288,667,15,
-80,Alfa,Wiórowa,551,537,15,Z
-81,Beta,Wórowa Biała,941,909,15,
-82,Alfa,Sklejka,690,1095,15,Z
-83,Alfa,Sklejka,1119,1401,15,
-84,Alfa,Sklejka,1478,1294,15,B
-85,Beta,Sklejka,1522,902,15,
-86,Alfa,Wiórowa,1526,555,15,
-87,Beta,Wórowa Biała,290,1300,15,
-88,Beta,Wórowa Biała,732,600,15,A
-89,Beta,MFP,376,795,15,A
-90,Beta,Wiórowa,1390,333,15,
-91,Beta,Sklejka,1432,203,15,A
-92,Alfa,Wiórowa,404,998,15,Z
-93,Alfa,Sklejka,322,1493,15,B
-94,Alfa,MFP,1363,248,15,
-95,Alfa,Wórowa Biała,1599,1035,15,
-96,Beta,Wórowa Biała,1189,1515,15,B
-97,Alfa,Wórowa Biała,693,1341,15,B
-98,Beta,MFP,726,1332,15,
-99,Alfa,Sklejka,561,301,15,Z
-100,Alfa,Wórowa Biała,834,307,15,A
+id;model;material;length;hight;thickness;suffix
+1;Alfa;Wiórowa;1360;379;15;
+2;Alfa;Wiórowa;1284;709;15;B
+3;Alfa;Wiórowa;1170;256;15;
+4;Alfa;Wiórowa;1149;594;15;A
+5;Alfa;Wiórowa;1122;922;15;
+6;Alfa;Wiórowa;1055;327;15;
+7;Alfa;Wiórowa;993;1340;15;A
+8;Alfa;Wiórowa;986;784;15;B
+9;Alfa;Wiórowa;932;962;15;
+10;Alfa;W.Biała;1534;116;15;B
+11;Alfa;W.Biała;1508;253;15;
+12;Alfa;Sklejka;1624;1282;15;
+13;Alfa;Sklejka;1592;1689;15;
+14;Alfa;MFP;1603;451;15;A
+15;Alfa;MFP;1323;450;15;
+16;Beta;Wiórowa;1609;1281;15;
+17;Beta;Wiórowa;1437;1561;15;
+18;Beta;Wiórowa;1121;1167;15;
+19;Beta;Wiórowa;1007;312;15;
+20;Beta;Wiórowa;911;712;15;
+21;Beta;W.Biała;1484;970;15;
+22;Beta;MFP;130;1259;15;Z
+23;Beta;MFP;111;1151;15;A
+24;Gamma;Wiórowa;1637;1216;15;
+25;Gamma;Wiórowa;1587;1488;15;
+26;Gamma;Wiórowa;1274;249;15;B
+27;Gamma;Wiórowa;1268;915;15;
+28;Gamma;Wiórowa;1055;139;15;
+29;Gamma;Wiórowa;1034;443;15;Z
+30;Gamma;Wiórowa;1011;936;15;
+31;Gamma;Wiórowa;1008;260;15;Z
+32;Gamma;Wiórowa;972;970;15;A
+33;Gamma;Wiórowa;962;131;15;
+34;Gamma;Wiórowa;914;1511;15;
+35;Gamma;Wiórowa;847;1295;15;
+36;Gamma;Wiórowa;798;1350;15;
+37;Gamma;Wiórowa;758;1044;15;Z
+38;Gamma;Wiórowa;479;965;15;
+39;Gamma;Wiórowa;476;1227;15;Z
+40;Gamma;Wiórowa;464;1043;15;
+41;Gamma;Wiórowa;272;1277;15;
+42;Gamma;Wiórowa;263;1100;15;
+43;Gamma;Wiórowa;218;629;15;
