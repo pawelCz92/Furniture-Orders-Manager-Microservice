@@ -1,6 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.configurations.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.part.model.PartQuantity;
+import com.pawel.furniturewithcomponentsrepository.domain.part.model.Part;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,5 @@ public class Configuration {
     @EqualsAndHashCode.Include
     private String name;
     private String description;
-
-    private Set<PartQuantity> partAndQuantities;
-
+    private Set<Part> parts;
 }

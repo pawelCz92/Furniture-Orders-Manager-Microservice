@@ -9,7 +9,6 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,12 +40,5 @@ public class Furniture {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    public void addAllConfigurations(Set<Configuration> configurations) {
-        if (this.configurations == null) {
-            this.configurations = new HashSet<>();
-        }
-        this.configurations.addAll(configurations);
     }
 }
