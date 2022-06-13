@@ -1,21 +1,22 @@
-package com.pawel.furniturewithcomponentsrepository.domain.element.controller.dto;
+package com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ElementDto {
+public class AddElementRequest {
 
+    private String furnitureId;
+    private String materialId;
     private int length;
     private int height;
     private int thickness;
     private String suffix;
     private String description;
-    private Long materialId;
-    private Long furnitureId;
 }

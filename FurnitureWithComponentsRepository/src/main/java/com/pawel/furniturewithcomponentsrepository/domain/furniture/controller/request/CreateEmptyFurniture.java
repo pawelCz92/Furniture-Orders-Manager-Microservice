@@ -3,14 +3,11 @@ package com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
 @NoArgsConstructor
-public class AddFurnitureRequest {
+public class CreateEmptyFurniture {
 
-    @NotBlank
     private String name;
     private String description;
-    //  private Set<Configuration> configurations;
+
 }

@@ -1,6 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.part.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.element.model.ElementQuantity;
+import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +18,6 @@ public class Part {
 
     private String name;
     private String description;
-    private int partPerConfiguration;
-    private Set<ElementQuantity> elementQuantities;
+    private Set<Element> elements;
+    private int quantityPerConfiguration;
 }
