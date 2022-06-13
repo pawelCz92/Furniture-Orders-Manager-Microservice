@@ -16,64 +16,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class Element implements Comparable<Element> {
+public class Element {
 
     @Id
     @EqualsAndHashCode.Exclude
     private String id;
 
+    private String furnitureName;
+    private Material material;
     private int length;
     private int height;
     private int thickness;
     private String suffix;
     private String description;
 
-    private Material material;
-
-    private String furnitureName;
-
-
-    public String toShortString() {
-        String shortDesc = "";
-        if (description != null && description.length() >= 10) {
-            shortDesc = description.substring(0, 9).concat("...");
-            shortDesc = " -  ShortDescr: " + shortDesc;
-        }
-        return String.format("%sx%sx%s %s - %s%s",
-                length, height, thickness, suffix, material.getName(), shortDesc);
-    }
-
-    @Override
-    public String toString() {
-        return "Element{" +
-                "id=" + id +
-                ", furniture=" + furnitureName +
-                ", material=" + material.getName() +
-                ", length=" + length +
-                ", height=" + height +
-                ", thickness=" + thickness +
-                ", suffix='" + suffix + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
-
-    @Override
-    public int compareTo(Element o) {
-        if (!o.getFurnitureName().equals(this.furnitureName)) {
-            return this.furnitureName.compareToIgnoreCase(o.getFurnitureName());
-        }
-        if (!o.getMaterial().getName().equals(this.material.getName())) {
-            return this.material.getName().compareToIgnoreCase(o.getMaterial().getName());
-        }
-        if (o.getLength() != this.length) {
-            return Integer.compare(this.length, o.getLength());
-        }
-        if (o.getHeight() != this.height) {
-            return Integer.compare(this.height, o.getHeight());
-        }
-        if (o.getThickness() != this.thickness) {
-            return Integer.compare(this.thickness, o.getThickness());
-        }
-        return 0;
+    public static Element fromDto(ElementDto elementDto, Material material) {
+        return Element.builder()
+                .furnitureName(elementDto.getFurnitureName())
+                .material(material)
+                .length(elementDto.getLength())
+                .height(elementDto.getHeight())
+                .thickness(elementDto.getThickness())
+                .suffix(elementDto.getSuffix())
+                .description(elementDto.getDescription())
+                .build();
     }
 }

@@ -1,4 +1,4 @@
-package com.pawel.furniturewithcomponentsrepository.domain.element.controller.dto;
+package com.pawel.furniturewithcomponentsrepository.domain.element.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ElementDto {
 
+    private String furnitureName;
+    private String materialName;
     private int length;
     private int height;
     private int thickness;
     private String suffix;
     private String description;
-    private Long materialId;
-    private Long furnitureId;
+    private boolean removed;
 }

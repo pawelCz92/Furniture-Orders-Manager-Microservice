@@ -1,8 +1,10 @@
 package com.pawel.furniturewithcomponentsrepository.domain.element.service;
 
 import com.pawel.furniturewithcomponentsrepository.domain.element.db.ElementRepo;
-import com.pawel.furniturewithcomponentsrepository.domain.element.exceptions.ElementAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
+import com.pawel.furniturewithcomponentsrepository.domain.element.model.ElementDto;
+import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
+import com.pawel.furniturewithcomponentsrepository.domain.material.service.MaterialService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,28 +18,32 @@ import java.util.Optional;
 public class ElementService {
 
     private final ElementRepo repo;
+    private final MaterialService materialService;
+    private final Fur
 
 
     public List<Element> findAllElements() {
         return repo.findAll();
     }
 
-    public Element save(Element element) {
-        if (findBy(element).isPresent()) {
-            throw new ElementAlreadyExistsException("Element: " + element.toShortString()
-                    + " already exist. Saving skipped");
+    public Element save(ElementDto elementDto) {
+        if (findBy(elementDto).isPresent()) {
+            throw new IllegalArgumentException("Element already exist.");
         }
-        return repo.save(element);
+
+        Material material = materialService.findMaterialByName(elementDto.getMaterialName()).orElseThrow(
+                () -> new IllegalArgumentException("Material: " + elementDto.getMaterialName()));
+        if ()
+            return repo.save(Element.fromDto(elementDto, material));
     }
 
-    private Optional<Element> findBy(Element element) {
-        return repo.findByFurnitureNameAndMaterial_NameAndLengthAndHeightAndThicknessAndSuffix(
-                element.getFurnitureName(),
-                element.getMaterial().getName(),
-                element.getLength(),
-                element.getHeight(),
-                element.getThickness(),
-                element.getSuffix()
-        );
+    private Optional<Element> findBy(ElementDto elementDto) {
+        return repo.findByFurnitureNameAndMaterialNameAndLengthAndHeightAndThicknessAndSuffix(
+                elementDto.getFurnitureName(),
+                elementDto.getMaterialName(),
+                elementDto.getLength(),
+                elementDto.getHeight(),
+                elementDto.getThickness(),
+                elementDto.getSuffix());
     }
 }

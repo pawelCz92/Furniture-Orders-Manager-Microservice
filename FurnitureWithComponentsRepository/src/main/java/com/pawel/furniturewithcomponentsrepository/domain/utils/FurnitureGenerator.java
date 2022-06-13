@@ -115,8 +115,8 @@ public class FurnitureGenerator {
             }
 
             Element element = Element.builder()
-                    .furnitureName(model)
-                    .material(new Material(null, material))
+                    .furnitureName(saveFurnitureIfNotExist(model))
+                    .material(saveMaterialIfNotExist(material))
                     .length(Integer.parseInt(length))
                     .height(Integer.parseInt(hight))
                     .thickness(Integer.parseInt(thickness))
@@ -129,45 +129,47 @@ public class FurnitureGenerator {
         return elements;
     }
 
+    private String saveFurnitureIfNotExist(String name) {
+        Optional<Furniture> furnitureOpt = furnitureService.findFurnitureByName(name);
+        if (furnitureOpt.isEmpty()) {
+            return furnitureService.save(Furniture.builder()
+                            .name(name)
+                            .build())
+                    .getName();
+        }
+        return furnitureOpt.get().getName();
+    }
+
     private Material saveMaterialIfNotExist(String name) {
         Optional<Material> materialOpt = materialService.findMaterialByName(name);
         if (materialOpt.isEmpty()) {
-            materialService.save(new Material(null, name));
+            return materialService.save(new Material(null, name));
         }
-        return materialService.findMaterialByName(name).get();
+        return materialOpt.get();
     }
 
-    private Furniture saveFurnitureIfNotExist(String name) {
-        Optional<Furniture> furnitureOpt = furnitureService.findFurnitureByName(name);
-        if (furnitureOpt.isEmpty()) {
-            furnitureService.save(Furniture.builder()
-                    .name(name)
-                    .build());
-        }
-        return furnitureService.findFurnitureByName(name).get();
-    }
 
     private List<Element> saveElements(Set<Element> elements) {
         return elements.stream()
                 .map(element -> {
                     try {
-                        Material material = saveMaterialIfNotExist(element.getMaterial().getName());
-                        Furniture furniture = saveFurnitureIfNotExist(element.getFurnitureName());
-                        return elementService.save(Element.builder()
-                                .furnitureName(furniture.getName())
-                                .material(material)
-                                .length(element.getLength())
-                                .height(element.getHeight())
-                                .thickness(element.getThickness())
-                                .suffix(element.getSuffix())
-                                .description(element.getDescription())
-                                .build());
+                        // String materialId = saveMaterialIfNotExist(element.getMaterialId());
+                        //   String furnitureId = saveFurnitureIfNotExist(element.getFurnitureId());
+                        return elementService.save(
+                                Element.builder()
+                                        .furnitureName(element.getFurnitureName())
+                                        .material(element.getMaterial())
+                                        .length(element.getLength())
+                                        .height(element.getHeight())
+                                        .thickness(element.getThickness())
+                                        .suffix(element.getSuffix())
+                                        .description(element.getDescription())
+                                        .build());
                     } catch (Exception e) {
                         log.warn(e.getMessage());
                     }
                     return null;
                 })
-                .toList();
-
+                .collect(Collectors.toList());
     }
 }

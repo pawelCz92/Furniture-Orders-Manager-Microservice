@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Configuration {

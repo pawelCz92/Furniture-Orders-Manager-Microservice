@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ElementRepo extends MongoRepository<Element, String> {
 
-    Optional<Element> findByFurnitureNameAndMaterial_NameAndLengthAndHeightAndThicknessAndSuffix(
-            String furnitureName, String materialName, int length, int height, int thickness, String suffix
+    Optional<Element> findByFurnitureNameAndMaterialNameAndLengthAndHeightAndThicknessAndSuffix(
+            String furnitureName, String materialId, int length, int height, int thickness, String suffix
     );
 }

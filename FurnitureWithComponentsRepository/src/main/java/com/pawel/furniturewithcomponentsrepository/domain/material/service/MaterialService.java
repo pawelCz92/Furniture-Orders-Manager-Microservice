@@ -4,7 +4,6 @@ import com.pawel.furniturewithcomponentsrepository.domain.material.db.MaterialRe
 import com.pawel.furniturewithcomponentsrepository.domain.material.exceptions.MaterialAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,21 +11,17 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class MaterialService {
 
     private final MaterialRepo repo;
 
 
-    public void save(Material material) {
+    public Material save(Material material) {
         if (findMaterialByName(material.getName()).isPresent()) {
             String message = "Material with name: " + material.getName() + " already exists.";
-            log.warn(message);
             throw new MaterialAlreadyExistsException(message);
         }
-        log.info("Saving material: {}", material.getName());
-        repo.save(material);
-        log.info("Saved material: {}", material);
+        return repo.save(material);
     }
 
     public List<Material> findAll() {

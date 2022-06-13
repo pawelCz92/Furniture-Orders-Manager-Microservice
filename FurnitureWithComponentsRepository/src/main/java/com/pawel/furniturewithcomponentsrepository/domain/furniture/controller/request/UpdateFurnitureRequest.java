@@ -7,14 +7,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
-
 @Getter
-public class AddFurnitureRequest {
+public class UpdateFurnitureRequest {
 
+    @NotBlank
+    private String id;
     @NotBlank
     private String name;
     private String description;
     @NotEmpty
     private Set<Configuration> configurations;
-
 }
