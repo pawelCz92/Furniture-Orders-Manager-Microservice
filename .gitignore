@@ -22,6 +22,7 @@ target/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
+/ng_modules/
 /dist/
 /nbdist/
 /.nb-gradle/
@@ -36,3 +37,4 @@ build/
 /mvnw
 /mvnw.cmd
 *.csv
+/node_modules
