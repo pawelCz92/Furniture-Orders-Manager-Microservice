@@ -6,6 +6,7 @@ import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.r
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.service.FurnitureService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashSet;
 
 @RestController
-@RequestMapping("api/v1/furniture")
+@RequestMapping("api/v1/furnitures")
 @RequiredArgsConstructor
+@Slf4j
 public class FurnitureController {
 
     private final FurnitureService service;
@@ -25,6 +27,7 @@ public class FurnitureController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create-empty")
     public Furniture addEmptyFurniture(@RequestBody CreateEmptyFurniture request) { // TODO add validator
+        log.info("---> Create empty furniture: name: {}, descr: {}", request.getName(), request.getDescription());
         Furniture furniture = Furniture.builder()
                 .name(request.getName())
                 .description(request.getDescription())

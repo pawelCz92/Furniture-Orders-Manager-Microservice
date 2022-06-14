@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col">
+    <h2>Menadżer Mebli</h2>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="row">
+        <label for="furniture-name"><strong>Nazwa modelu:</strong></label>
+        <input type="text" id="furniture-name" name="furniture-name" #furnitureNameInput>
+        <label for="furniture-description">Opis modelu</label>
+        <input type="text" id="furniture-description" name="furniture-description" #furnitureDescriptionInput>
+        <button (click)="createFurniture(furnitureNameInput.value, furnitureDescriptionInput.value)">Dodaj</button>
+      </div>
+      <div class="row">
+        <table id="elements" class="table-bordered">
+          <tr>
+            <th>Materiał</th>
+            <th>Długość</th>
+            <th>Wysokość</th>
+            <th>Grubość</th>
+            <th>Suffix</th>
+            <th>Opis</th>
+          </tr>
+          <tr *ngFor="elements">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
+      </div>
+      {{furniture | json}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+  <div class="row">
+    <div class="col-auto">
+      <h2>Dodaj materiał</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <table class="table-bordered">
+        <tr>
+          <th>Nazwa</th>
+          <th>Usuń</th>
+        </tr>
+        <tr *ngFor="let material of materials">
+          <td>{{material.name}}</td>
+          <td>
+            <button class="btn-danger" (click)="removeMaterial(material.id)">X</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" #materialNameInput>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button (click)="saveMaterial(materialNameInput.value)">Dodaj</button>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>

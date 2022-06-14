@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,14 @@ public class MaterialService {
 
     public Optional<Material> findMaterialById(String id) {
         return repo.findById(id);
+    }
+
+    public void removeById(String id) {
+        Objects.requireNonNull(id, "Material id for delete by id must not be null");
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+            log.info("Material with id: {} successfully removed.", id);
+        }
+        throw new IllegalArgumentException("Material with id: '" + id + "' not found");
     }
 }
