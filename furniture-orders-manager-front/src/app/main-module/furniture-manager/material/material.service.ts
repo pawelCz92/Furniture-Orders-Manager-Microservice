@@ -22,7 +22,7 @@ export class MaterialService {
     return this.http.post<Material>(this.materialsUrl, request);
   }
 
-  removeMaterialById(id: string): Observable<any> {
-    return this.http.delete<any>(this.materialsUrl + "/" + id);
+  removeMaterialById(id: string): Observable<unknown> {
+    return this.http.delete(this.materialsUrl + "/" + id);
   }
 }

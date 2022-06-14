@@ -39,14 +39,14 @@ public class MaterialController {
     @ResponseStatus(HttpStatus.OK)
     public List<Material> findAllMaterials() {
         List<Material> materials = service.findAll();
-        log.info("Returning all materials: {}", materials.size());
+        log.info("---> Returning all materials: {}", materials.size());
         return materials;
     }
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @DeleteMapping("/{id}")
     public void deleteMaterialById(@PathVariable String id) {
-        log.info("Removing material by id: {}", id);
+        log.info("---> Removing material by id: {}", id);
         service.removeById(id);
     }
 }

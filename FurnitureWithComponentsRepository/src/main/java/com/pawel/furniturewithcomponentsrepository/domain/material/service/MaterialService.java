@@ -44,10 +44,10 @@ public class MaterialService {
 
     public void removeById(String id) {
         Objects.requireNonNull(id, "Material id for delete by id must not be null");
-        if (repo.existsById(id)) {
-            repo.deleteById(id);
-            log.info("Material with id: {} successfully removed.", id);
+        if (!repo.existsById(id)) {
+            throw new IllegalArgumentException("Material with id: '" + id + "' not found");
         }
-        throw new IllegalArgumentException("Material with id: '" + id + "' not found");
+        repo.deleteById(id);
+        log.info("Material with id: {} successfully removed.", id);
     }
 }
