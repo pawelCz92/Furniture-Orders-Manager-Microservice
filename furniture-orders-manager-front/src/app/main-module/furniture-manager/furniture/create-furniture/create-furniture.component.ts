@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Furniture} from "../model/Furniture";
 import {FurnitureService} from "../furniture.service";
-import {CreateFurnitureRequest} from "../model/CreateFurnitureRequest";
+import {CreateFurnitureRequest} from "../model/dto/CreateFurnitureRequest";
+import {FurnitureIdNameDescriptionDto} from "../model/dto/FurnitureIdNameDescriptionDto";
+import {FurnitureCommonService} from "../../furniture-common.service";
 
 @Component({
   selector: 'app-create-furniture',
@@ -10,22 +11,48 @@ import {CreateFurnitureRequest} from "../model/CreateFurnitureRequest";
 })
 export class CreateFurnitureComponent implements OnInit {
 
-  furniture!: Furniture;
+  furnitureNameAndDescriptionDtos!: FurnitureIdNameDescriptionDto[];
 
-  constructor(private furnitureService: FurnitureService) {
+  constructor(private furnitureService: FurnitureService,
+              private commonService: FurnitureCommonService) {
   }
 
   ngOnInit(): void {
+    this.loadFurnitureDtos();
+    console.info("FurnitureDtos loaded")
+  }
+
+  loadFurnitureDtos(): void {
+    this.furnitureService.getAllFurnitureNameAndDescription().subscribe(furnitureDto =>
+      this.furnitureNameAndDescriptionDtos = furnitureDto);
   }
 
   createFurniture(name: string, description: string) {
     let createFurnitureRequest: CreateFurnitureRequest = {
-      name, description
+      name,
+      description
     };
-    createFurnitureRequest.name = name;
-    createFurnitureRequest.description = description;
     this.furnitureService.postCreateFurniture(createFurnitureRequest)
-      .subscribe(furniture => this.furniture = furniture);
+      .subscribe(() => {
+          this.loadFurnitureDtos();
+          alert("Added!")
+        },
+        (err) => {
+          this.commonService.handleError(err)
+          this.loadFurnitureDtos();
+        });
+  }
 
+  removeFurniture(id: string) {
+    this.furnitureService.removeFurnitureById(id).subscribe(
+      () => {
+        alert("Removed!")
+        this.loadFurnitureDtos();
+      },
+      (error => {
+        this.commonService.handleError(error)
+        this.loadFurnitureDtos();
+      })
+    );
   }
 }

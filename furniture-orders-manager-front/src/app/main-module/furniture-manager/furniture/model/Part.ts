@@ -1,4 +1,4 @@
-import {Element} from "./Element";
+import {Element} from "../../element/model/Element";
 
 export interface Part {
 

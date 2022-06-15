@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Furniture} from "./model/Furniture";
-import {CreateFurnitureRequest} from "./model/CreateFurnitureRequest";
+import {CreateFurnitureRequest} from "./model/dto/CreateFurnitureRequest";
+import {FurnitureIdNameDescriptionDto} from "./model/dto/FurnitureIdNameDescriptionDto";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,22 @@ import {CreateFurnitureRequest} from "./model/CreateFurnitureRequest";
 export class FurnitureService {
 
   private apiFurnitureUrl: string = "http://localhost:8080/api/v1/furnitures"
-  private apiCreateEmptyFurniture: string = this.apiFurnitureUrl + "/create-empty"
+  private apiCreateEmptyFurnitureUrl: string = this.apiFurnitureUrl + "/create-empty"
+  private apiGetFurnitureNameAndDescriptionDtosUrl: string = this.apiFurnitureUrl + "/names-descriptions";
+  private apiRemoveFurnitureById: string = this.apiFurnitureUrl + "/";
 
   constructor(private http: HttpClient) {
   }
 
   postCreateFurniture(request: CreateFurnitureRequest): Observable<Furniture> {
-    return this.http.post<Furniture>(this.apiCreateEmptyFurniture, request);
+    return this.http.post<Furniture>(this.apiCreateEmptyFurnitureUrl, request);
   }
 
+  getAllFurnitureNameAndDescription(): Observable<FurnitureIdNameDescriptionDto[]> {
+    return this.http.get<FurnitureIdNameDescriptionDto[]>(this.apiGetFurnitureNameAndDescriptionDtosUrl);
+  }
+
+  removeFurnitureById(id: string) {
+    return this.http.delete(this.apiRemoveFurnitureById + id);
+  }
 }

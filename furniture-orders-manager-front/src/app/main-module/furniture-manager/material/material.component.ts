@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Material} from "./model/Material";
 import {MaterialService} from "./material.service";
 import {CreateMaterialRequest} from "./model/CreateMaterialRequest";
-import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
+import {FurnitureCommonService} from "../furniture-common.service";
 
 @Component({
   selector: 'app-material',
@@ -15,7 +14,8 @@ export class MaterialComponent implements OnInit {
 
   materials: Material[] = [];
 
-  constructor(private materialService: MaterialService) {
+  constructor(private materialService: MaterialService,
+              private commonService: FurnitureCommonService) {
   }
 
   ngOnInit(): void {
@@ -42,24 +42,9 @@ export class MaterialComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-        this.handleError(error);
+        this.commonService.handleError(error);
         this.loadMaterials();
       })
   }
 
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.error('An error occurred:', error.error);
-    } else {
-      if (error.status >= 200 && error.status <= 299) {
-        alert("Material created successfully.")
-        return;
-      }
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-      alert('Error! Code: ' + error.status + ' -> ' + error.error)
-    }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
-  }
 }

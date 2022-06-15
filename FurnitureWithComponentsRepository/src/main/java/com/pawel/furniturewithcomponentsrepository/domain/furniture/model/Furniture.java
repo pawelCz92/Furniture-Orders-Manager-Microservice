@@ -2,6 +2,7 @@ package com.pawel.furniturewithcomponentsrepository.domain.furniture.model;
 
 import com.pawel.furniturewithcomponentsrepository.domain.configurations.model.Configuration;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureIdNameDescriptionDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -59,5 +60,13 @@ public class Furniture {
             throw new IllegalArgumentException("Elements in furniture: " + name + " are null, empty or not contain " +
                     "given element to remove");
         }
+    }
+
+    public FurnitureIdNameDescriptionDto toFurnitureIdNamesDescriptionsDto() {
+        return FurnitureIdNameDescriptionDto.builder()
+                .id(this.id)
+                .name(this.name)
+                .description(this.description)
+                .build();
     }
 }
