@@ -1,19 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {FurnitureService} from "./furniture.service";
-import {Furniture} from "./furniture/Furniture";
-import {CreateFurnitureRequest} from "./furniture/CreateFurnitureRequest";
-import {Material} from "./material/model/Material";
+import {Furniture} from "../model/Furniture";
+import {FurnitureService} from "../furniture.service";
+import {CreateFurnitureRequest} from "../model/CreateFurnitureRequest";
 
 @Component({
-  selector: 'app-furniture-manager',
-  templateUrl: './furniture.component.html',
-  styleUrls: ['./furniture.component.less']
+  selector: 'app-create-furniture',
+  templateUrl: './create-furniture.component.html',
+  styleUrls: ['./create-furniture.component.less']
 })
-export class FurnitureComponent implements OnInit {
+export class CreateFurnitureComponent implements OnInit {
 
   furniture!: Furniture;
-  elements!: Element[];
-  materials!: Material[]
 
   constructor(private furnitureService: FurnitureService) {
   }

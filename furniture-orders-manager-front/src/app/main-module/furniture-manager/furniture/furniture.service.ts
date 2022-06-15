@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Furniture} from "./furniture/Furniture";
-import {CreateFurnitureRequest} from "./furniture/CreateFurnitureRequest";
+import {Furniture} from "./model/Furniture";
+import {CreateFurnitureRequest} from "./model/CreateFurnitureRequest";
 
 @Injectable({
   providedIn: 'root'

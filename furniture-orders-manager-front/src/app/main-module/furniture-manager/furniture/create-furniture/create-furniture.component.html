@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-auto">
+    <div class="row">
+      <label for="furniture-name"><strong>Nazwa modelu:</strong></label>
+      <input type="text" id="furniture-name" name="furniture-name" #furnitureNameInput>
+      <label for="furniture-description">Opis modelu</label>
+      <input type="text" id="furniture-description" name="furniture-description" #furnitureDescriptionInput>
+      <button (click)="createFurniture(furnitureNameInput.value, furnitureDescriptionInput.value);
+        furnitureNameInput.value = '';
+        furnitureDescriptionInput.value = ''"> Dodaj
+      </button>
+    </div>
+    {{furniture | json}}
+  </div>
+</div>
