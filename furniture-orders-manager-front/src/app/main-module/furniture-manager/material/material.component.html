@@ -9,20 +9,23 @@
       <table class="table-bordered">
         <tr>
           <th>Nazwa</th>
+          <th>Opis</th>
           <th>Akcja</th>
         </tr>
-        <tr *ngFor="let material of materials">
+        <tr *ngFor="let material of materials; let i = index">
           <td>{{material?.name}}</td>
+          <td>{{material?.description}}</td>
           <td>
-            <button class="btn-danger" (click)="removeMaterial(material.id)">X</button>
+            <button class="btn-danger" (click)="removeMaterial(i)">X</button>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="text" #materialNameInput>
+            <input type="text" [(ngModel)]="createMaterialRequest.name">
           </td>
+            <input type="text" [(ngModel)]="createMaterialRequest.description">
           <td>
-            <button (click)="saveMaterial(materialNameInput.value); materialNameInput.value = ''">Dodaj</button>
+            <button (click)="saveMaterial()">Dodaj</button>
           </td>
         </tr>
 

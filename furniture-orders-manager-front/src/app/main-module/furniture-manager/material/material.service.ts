@@ -9,7 +9,7 @@ import {CreateMaterialRequest} from "./model/CreateMaterialRequest";
 })
 export class MaterialService {
 
-  materialsUrl: string = "http://localhost:8080/api/v1/materials";
+  materialsUrl: string = "http://localhost:8080/api/v1/materials/"; //TODO change url to const here and every service
 
   constructor(private http: HttpClient) {
   }
@@ -23,6 +23,10 @@ export class MaterialService {
   }
 
   removeMaterialById(id: string): Observable<unknown> {
-    return this.http.delete(this.materialsUrl + "/" + id);
+    return this.http.delete(this.materialsUrl + id);
+  }
+
+  findById(id: string): Observable<Material> {
+    return this.http.get<Material>(this.materialsUrl + id);
   }
 }

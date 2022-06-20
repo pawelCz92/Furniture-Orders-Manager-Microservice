@@ -17,13 +17,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Element {
 
     private String furnitureId;
-    private String materialId;
+    private String materialName;
     private int length;
     private int height;
     private int thickness;
     private String suffix;
     @EqualsAndHashCode.Exclude
     private String description;
-
 
 }

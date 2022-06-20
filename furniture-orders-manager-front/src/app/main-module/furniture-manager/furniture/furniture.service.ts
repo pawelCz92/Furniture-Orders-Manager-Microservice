@@ -10,10 +10,10 @@ import {FurnitureIdNameDescriptionDto} from "./model/dto/FurnitureIdNameDescript
 })
 export class FurnitureService {
 
-  private apiFurnitureUrl: string = "http://localhost:8080/api/v1/furnitures"
-  private apiCreateEmptyFurnitureUrl: string = this.apiFurnitureUrl + "/create-empty"
-  private apiGetFurnitureNameAndDescriptionDtosUrl: string = this.apiFurnitureUrl + "/names-descriptions";
-  private apiRemoveFurnitureById: string = this.apiFurnitureUrl + "/";
+  private apiFurnitureUrl: string = "http://localhost:8080/api/v1/furniture/"
+  private apiCreateEmptyFurnitureUrl: string = this.apiFurnitureUrl + "create-empty"
+  private apiGetFurnitureNameAndDescriptionDtosUrl: string = this.apiFurnitureUrl + "names-descriptions";
+
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,11 @@ export class FurnitureService {
     return this.http.get<FurnitureIdNameDescriptionDto[]>(this.apiGetFurnitureNameAndDescriptionDtosUrl);
   }
 
-  removeFurnitureById(id: string) {
-    return this.http.delete(this.apiRemoveFurnitureById + id);
+  removeFurnitureById(id: string): Observable<unknown>{
+    return this.http.delete(this.apiFurnitureUrl + id);
+  }
+
+  getFurnitureById(id: string): Observable<Furniture> {
+    return this.http.get<Furniture>(this.apiFurnitureUrl + id);
   }
 }

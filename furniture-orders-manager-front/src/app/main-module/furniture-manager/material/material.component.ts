@@ -13,6 +13,8 @@ export class MaterialComponent implements OnInit {
 
 
   materials: Material[] = [];
+  createMaterialRequest:   CreateMaterialRequest = {name: '', description: ''}
+
 
   constructor(private materialService: MaterialService,
               private commonService: FurnitureCommonService) {
@@ -27,16 +29,14 @@ export class MaterialComponent implements OnInit {
     this.materialService.getAllMaterials().subscribe(materials => this.materials = materials);
   }
 
-  removeMaterial(id: string) {
+  removeMaterial(i: number) {
+    let id = this.materials[i].id;
     this.materialService.removeMaterialById(id)
       .subscribe(() => this.loadMaterials());
   }
 
-  saveMaterial(name: string) {
-    let request: CreateMaterialRequest = {
-      name: name
-    };
-    this.materialService.saveMaterial(request).subscribe( //TODO subscribe deprecated
+  saveMaterial() {
+    this.materialService.saveMaterial(this.createMaterialRequest).subscribe( //TODO subscribe deprecated
       () => {
         this.loadMaterials();
       },
@@ -44,6 +44,7 @@ export class MaterialComponent implements OnInit {
         console.error(error);
         this.commonService.handleError(error);
         this.loadMaterials();
+        this.createMaterialRequest = {name: '', description: ''}
       })
   }
 

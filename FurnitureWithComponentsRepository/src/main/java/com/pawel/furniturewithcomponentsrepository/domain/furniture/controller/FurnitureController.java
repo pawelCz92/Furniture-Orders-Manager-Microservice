@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/v1/furnitures")
+@RequestMapping("api/v1/furniture")
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin
@@ -52,6 +52,21 @@ public class FurnitureController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable String id){
+        try {
+            Furniture furniture = service.findFurnitureById(id).orElseThrow(() ->
+                    new ObjectNotFoundException("Furniture with id: " + id + " not found"));
+            return ResponseEntity.ok(furniture);
+        } catch (ObjectNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }

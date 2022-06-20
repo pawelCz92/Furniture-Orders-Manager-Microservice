@@ -12,6 +12,7 @@ import {FurnitureCommonService} from "../../furniture-common.service";
 export class CreateFurnitureComponent implements OnInit {
 
   furnitureNameAndDescriptionDtos!: FurnitureIdNameDescriptionDto[];
+  createFurnitureRequest: CreateFurnitureRequest = {name: '', description: ''};
 
   constructor(private furnitureService: FurnitureService,
               private commonService: FurnitureCommonService) {
@@ -27,12 +28,8 @@ export class CreateFurnitureComponent implements OnInit {
       this.furnitureNameAndDescriptionDtos = furnitureDto);
   }
 
-  createFurniture(name: string, description: string) {
-    let createFurnitureRequest: CreateFurnitureRequest = {
-      name,
-      description
-    };
-    this.furnitureService.postCreateFurniture(createFurnitureRequest)
+  createFurniture() {
+    this.furnitureService.postCreateFurniture(this.createFurnitureRequest)
       .subscribe(() => {
           this.loadFurnitureDtos();
           alert("Added!")
@@ -41,9 +38,11 @@ export class CreateFurnitureComponent implements OnInit {
           this.commonService.handleError(err)
           this.loadFurnitureDtos();
         });
+    this.clearNameAndDescriptionInput()
   }
 
-  removeFurniture(id: string) {
+  removeFurniture(i: number) {
+    let id: string = this.furnitureNameAndDescriptionDtos[i].id
     this.furnitureService.removeFurnitureById(id).subscribe(
       () => {
         alert("Removed!")
@@ -54,5 +53,10 @@ export class CreateFurnitureComponent implements OnInit {
         this.loadFurnitureDtos();
       })
     );
+    this.clearNameAndDescriptionInput()
+  }
+
+  clearNameAndDescriptionInput() {
+    this.createFurnitureRequest = {name: '', description: ''}
   }
 }

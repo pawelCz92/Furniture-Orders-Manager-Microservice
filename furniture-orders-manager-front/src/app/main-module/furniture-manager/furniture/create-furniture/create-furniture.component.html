@@ -8,22 +8,22 @@
             <th>Opis</th>
             <th>Akcja</th>
           </tr>
-          <tr *ngFor="let furnitureDto of furnitureNameAndDescriptionDtos">
+          <tr *ngFor="let furnitureDto of furnitureNameAndDescriptionDtos; let i = index">
             <td>{{furnitureDto?.name}}</td>
             <td>{{furnitureDto?.description}}</td>
             <td>
-              <button class="btn-danger" (click)="removeFurniture(furnitureDto.id)">X</button>
+              <button class="btn-danger" (click)="removeFurniture(i)">X</button>
             </td>
           </tr>
           <tr>
-            <td><input type="text" id="furniture-name" name="furniture-name" #furnitureNameInput></td>
-            <td><input type="text" id="furniture-description" name="furniture-description" #furnitureDescriptionInput>
+            <td><input type="text" id="furniture-name" name="furniture-name"
+                       [(ngModel)]="createFurnitureRequest.name"></td>
+            <td><input type="text" id="furniture-description" name="furniture-description"
+                       [(ngModel)]="createFurnitureRequest.description">
             </td>
             <td>
               <button class="btn-outline-primary, btn-success"
-                      (click)="createFurniture(furnitureNameInput.value, furnitureDescriptionInput.value);
-        furnitureNameInput.value = '';
-        furnitureDescriptionInput.value = ''"> Dodaj
+                      (click)="createFurniture()"> Dodaj
               </button>
             </td>
           </tr>

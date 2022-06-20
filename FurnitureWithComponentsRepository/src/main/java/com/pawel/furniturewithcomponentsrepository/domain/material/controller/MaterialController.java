@@ -1,6 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.material.controller;
 
-import com.pawel.furniturewithcomponentsrepository.domain.material.controller.request.AddMaterialRequest;
+import com.pawel.furniturewithcomponentsrepository.domain.material.controller.request.CreateMaterialRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.material.exceptions.MaterialAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
 import com.pawel.furniturewithcomponentsrepository.domain.material.service.MaterialService;
@@ -30,8 +30,11 @@ public class MaterialController {
     private final MaterialService service;
 
     @PostMapping
-    public ResponseEntity<?> saveMaterial(@RequestBody AddMaterialRequest request) { //TODO add validator for request
-        Material material = new Material(null, request.getName());
+    public ResponseEntity<?> saveMaterial(@RequestBody CreateMaterialRequest request) { //TODO add validator for request
+        Material material = Material.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .build();
         try {
             service.save(material);
         } catch (MaterialAlreadyExistsException me) {
