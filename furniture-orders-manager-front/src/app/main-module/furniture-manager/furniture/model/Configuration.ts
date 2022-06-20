@@ -1,8 +1,8 @@
 import {Part} from "./Part";
 
-export interface Configuration {
+export class Configuration {
 
-  name: string;
-  description: string;
-  parts: Set<Part>;
+  name: string = '';
+  description: string = '';
+  parts: Part[] = [];
 }

@@ -1,5 +1,6 @@
 package com.pawel.furniturewithcomponentsrepository.domain.furniture.model;
 
+import com.pawel.furniturewithcomponentsrepository.domain.common.exception.ObjectNotFoundException;
 import com.pawel.furniturewithcomponentsrepository.domain.configurations.model.Configuration;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureIdNameDescriptionDto;
@@ -14,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 
 @Document(collection = "furniture")

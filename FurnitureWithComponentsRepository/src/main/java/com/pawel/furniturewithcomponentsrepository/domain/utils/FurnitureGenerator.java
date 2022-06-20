@@ -4,7 +4,7 @@
 //import com.pawel.furniturewithcomponentsrepository.domain.element.service.ElementService;
 //import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 //import com.pawel.furniturewithcomponentsrepository.domain.furniture.service.FurnitureService;
-//import com.pawel.furniturewithcomponentsrepository.domain.material.model.Material;
+//import com.pawel.furniturewithcomponentsrepository.domain.element.model.Material;
 //import com.pawel.furniturewithcomponentsrepository.domain.material.service.MaterialService;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,9 @@
 import {Element} from "../../element/model/Element";
 
-export interface Part {
+export class Part {
 
-  name: string;
-  description: string
-  elements: Set<Element>
-  quantityPerConfiguration: number
+  name: string = '';
+  description: string = ''
+  elements: Element[] = [];
+  quantityPerConfiguration: number = 0
 }

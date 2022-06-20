@@ -1,10 +1,10 @@
 import {Configuration} from "./Configuration";
 import {Element} from "../../element/model/Element";
 
-export interface Furniture {
+export class Furniture {
 
-  name: string;
-  description: string;
-  configurations: Set<Configuration>;
-  elements: Set<Element>;
+  name: string = '';
+  description: string = '';
+  configurations: Configuration[] = [];
+  elements: Element[] = [];
 }

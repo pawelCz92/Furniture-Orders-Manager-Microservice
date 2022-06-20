@@ -8,7 +8,6 @@ import com.pawel.furniturewithcomponentsrepository.domain.furniture.db.Furniture
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.ElementAlreadyExistException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
-import com.pawel.furniturewithcomponentsrepository.domain.material.service.MaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ import java.util.Optional;
 public class FurnitureService {
 
     private final FurnitureRepo furnitureRepo;
-    private final MaterialService materialService;
 
 
     public void saveEmpty(Furniture furniture) {
@@ -35,11 +33,7 @@ public class FurnitureService {
         Furniture furniture = findFurnitureByName(request.getFurnitureName()).orElseThrow(
                 () -> new ObjectNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
 
-        if (materialService.findMaterialByName(request.getMaterialName()).isEmpty()) {
-            throw new ObjectNotFoundException("Material with name: " + request.getMaterialName() + " not found");
-        }
         Element element = Element.builder()
-                .furnitureId(request.getFurnitureName())
                 .materialName(request.getMaterialName())
                 .length(request.getLength())
                 .height(request.getHeight())
@@ -58,11 +52,7 @@ public class FurnitureService {
         Furniture furniture = findFurnitureByName(request.getFurnitureName()).orElseThrow(
                 () -> new ObjectNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
 
-        if (materialService.findMaterialByName(request.getMaterialName()).isEmpty()) {
-            throw new ObjectNotFoundException("Material with name: " + request.getMaterialName() + " not found");
-        }
         Element element = Element.builder()
-                .furnitureId(request.getFurnitureName())
                 .materialName(request.getMaterialName())
                 .length(request.getLength())
                 .height(request.getHeight())

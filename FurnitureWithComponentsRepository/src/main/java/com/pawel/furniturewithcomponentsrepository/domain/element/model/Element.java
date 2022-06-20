@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode
 public class Element {
 
-    private String furnitureId;
     private String materialName;
     private int length;
     private int height;
@@ -24,5 +23,13 @@ public class Element {
     private String suffix;
     @EqualsAndHashCode.Exclude
     private String description;
+
+    @Override
+    public String toString() {
+        if (suffix == null || suffix.isBlank()) {
+            return String.format("(%s) %d x %d x %d", materialName, length, height, thickness);
+        }
+        return String.format("(%s) %d x %d x %d - %s", materialName, length, height, thickness, suffix);
+    }
 
 }
