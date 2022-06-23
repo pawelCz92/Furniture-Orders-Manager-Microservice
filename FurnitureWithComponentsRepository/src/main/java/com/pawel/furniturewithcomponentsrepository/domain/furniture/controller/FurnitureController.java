@@ -7,6 +7,7 @@ import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.r
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.ElementAlreadyExistException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureAlreadyExistsException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureDto;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureIdNameDescriptionDto;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.service.FurnitureService;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +32,18 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/furniture")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin
+@CrossOrigin("*")
 public class FurnitureController {
 
     private final FurnitureService service;
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<FurnitureDto> getAllFurniture() {
+        return service.findAllFurniture().stream()
+                .map(Furniture::toDto)
+                .collect(Collectors.toList());
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create-empty")
@@ -58,7 +67,7 @@ public class FurnitureController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable String id){
+    public ResponseEntity<?> getById(@PathVariable String id) {
         try {
             Furniture furniture = service.findFurnitureById(id).orElseThrow(() ->
                     new ObjectNotFoundException("Furniture with id: " + id + " not found"));
@@ -66,7 +75,7 @@ public class FurnitureController {
         } catch (ObjectNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
