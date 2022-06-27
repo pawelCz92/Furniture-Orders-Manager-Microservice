@@ -1,35 +1,45 @@
-body{
+body {
     background-color: #313131;
     color: whitesmoke;
+    min-width: 600px;
 }
+
 
 .app-content {
     margin: 20px;
-    border: 1px solid;
 }
 
 .nav-content {
-    margin: 20px;
-    border: 1px solid;
+    margin-top: 50px;
+    margin-bottom: auto;
+    margin-right: 20px;
 }
 
-    .nav-btn {
-      padding: 10px;
-        margin: 10px;
-    }
+.active {
+    border-bottom: yellow;
+}
+
+.nav-btn {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 110px;
+}
+
+.nav-btn:hover {
+    font-weight: 700;
+}
 
 .header-content {
     margin: 20px;
-    border: 1px solid;
 }
 
 .footer-content {
     margin: 20px;
-    border: 1px solid;
     font-size: 12px;
 }
 
 .content-content {
     margin: 20px;
-    border: 1px solid;
+    min-width: 60%;
 }

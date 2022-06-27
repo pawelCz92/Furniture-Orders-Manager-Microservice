@@ -4,7 +4,7 @@ export class Cutting extends Component {
     render() {
         return (
             <div>
-                <h1>Cutting component</h1>
+                <h2>Cutting component</h2>
             </div>
         );
     }

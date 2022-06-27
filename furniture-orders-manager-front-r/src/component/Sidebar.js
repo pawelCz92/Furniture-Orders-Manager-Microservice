@@ -1,13 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {Furniture} from "./pages/Furniture";
+import {NavLink} from "react-router-dom";
 
 
 const Sidebar = () => {
     return (
         <>
-            <p>Sidebar</p>
-
             {sidebarData.map((item) => {
                 return (<NavItem item={item} key={item.title}/>)
             })}
@@ -19,9 +16,9 @@ const NavItem = (props) => {
     return (
         <div className="row">
             <div className="col">
-                <Link to={props.item.path} exact={props.item.exact ? "true" : "false"}>
+                <NavLink to={props.item.path} exact={props.item.exact ? props.item.exact : 'false'}>
                     <button className="btn btn-primary nav-btn">{props.item.title}</button>
-                </Link>
+                </NavLink>
             </div>
         </div>
     )

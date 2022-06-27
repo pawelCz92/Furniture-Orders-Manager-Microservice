@@ -15,7 +15,7 @@
     <groupId>com.pawel</groupId>
     <artifactId>furnitureordersmanager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Furniture Orders Manager</name>
+    <name>FurnitureMain Orders Manager</name>
 
     <properties>
         <java.version>17</java.version>
