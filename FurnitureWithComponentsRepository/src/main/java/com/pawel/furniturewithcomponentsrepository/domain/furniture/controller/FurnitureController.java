@@ -1,12 +1,13 @@
 package com.pawel.furniturewithcomponentsrepository.domain.furniture.controller;
 
-import com.pawel.furniturewithcomponentsrepository.domain.common.exception.ObjectNotFoundException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request.AddElementRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request.CreateEmptyFurniture;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request.RemoveElementRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.ElementAlreadyExistException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureAlreadyExistsException;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureNotFoundException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureDto;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureIdNameDescriptionDto;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.service.FurnitureService;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class FurnitureController {
             Furniture furniture = Furniture.builder()
                     .name(request.getName())
                     .description(request.getDescription())
-                    .configurations(new HashSet<>()).build();
+                    .furnitureConfigs(new HashSet<>()).build();
             service.saveEmpty(furniture);
             return ResponseEntity.ok().build();
         } catch (FurnitureAlreadyExistsException e) {
@@ -57,16 +58,18 @@ public class FurnitureController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable String id){
+    @GetMapping("/{name}")
+    public ResponseEntity<?> getByName(@PathVariable String name){
         try {
-            Furniture furniture = service.findFurnitureById(id).orElseThrow(() ->
-                    new ObjectNotFoundException("Furniture with id: " + id + " not found"));
-            return ResponseEntity.ok(furniture);
-        } catch (ObjectNotFoundException e) {
+            FurnitureDto furnitureDto = service.findFurnitureByName(name)
+                    .map(Furniture::toDto)
+                    .orElseThrow(() ->
+                    new FurnitureNotFoundException("Furniture with name: " + name + " not found"));
+            return ResponseEntity.ok(furnitureDto);
+        } catch (FurnitureNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
@@ -74,7 +77,7 @@ public class FurnitureController {
     @PostMapping("/add-element")
     public ResponseEntity<?> addElement(@RequestBody AddElementRequest request) { // TODO add validator
         try {
-            return ResponseEntity.ok(service.addElement(request));
+            return ResponseEntity.ok(service.addElement(request).toDto());
         } catch (ElementAlreadyExistException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -86,8 +89,9 @@ public class FurnitureController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/remove-element")
-    public Furniture removeElement(RemoveElementRequest request) { // TODO add validator
-        return service.removeElement(request);
+    public void removeElement(@RequestBody RemoveElementRequest request) { // TODO add validator
+        //TODO add removing element from all parts feature
+        service.removeElement(request);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -104,7 +108,7 @@ public class FurnitureController {
         try {
             service.removeFurnitureById(id);
             return ResponseEntity.ok().build();
-        } catch (ObjectNotFoundException e) {
+        } catch (FurnitureNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {

@@ -38,3 +38,4 @@ build/
 /mvnw.cmd
 *.csv
 /node_modules
+/furniture-orders-manager-front-r/node_modules/

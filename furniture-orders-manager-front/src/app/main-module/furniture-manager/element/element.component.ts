@@ -3,7 +3,8 @@ import {FurnitureIdNameDescriptionDto} from "../furniture/model/dto/FurnitureIdN
 import {Furniture} from "../furniture/model/Furniture";
 import {FurnitureService} from "../furniture/furniture.service";
 import {FurnitureCommonService} from "../furniture-common.service";
-import {MaterialService} from "../material/material.service";
+import {Element} from "./model/Element";
+import {Observer} from "rxjs";
 
 @Component({
   selector: 'app-element',
@@ -14,14 +15,13 @@ export class ElementComponent implements OnInit {
 
 
   furnitureDtos: FurnitureIdNameDescriptionDto[] = [];
-  selectedFurnitureId: string = '';
-  elements: Element[] = []
+  selectedFurnitureName: string = '';
   furniture!: Furniture;
+  newElement: Element = new Element();
 
   constructor(
     private furnitureService: FurnitureService,
-    private furnitureCommonService: FurnitureCommonService,
-    private materialService: MaterialService) {
+    private furnitureCommonService: FurnitureCommonService) {
   }
 
   ngOnInit(): void {
@@ -41,18 +41,38 @@ export class ElementComponent implements OnInit {
 
   selectionChange(i: number): void {
     console.info(this.furnitureDtos[i].name);
-    this.selectedFurnitureId = this.furnitureDtos[i].id;
-    this.loadFurnitureById(this.selectedFurnitureId);
+    this.selectedFurnitureName = this.furnitureDtos[i].name;
+    this.loadFurnitureByName(this.selectedFurnitureName);
+    this.newElement = new Element();
   }
 
-  loadFurnitureById(id: string): void {
-    this.furnitureService.getFurnitureById(id).subscribe(
-      (fur) => {
-        this.furniture = fur;
-      },
-      (err) => {
-        this.furnitureCommonService.handleError(err);
-      }
-    )
+  furnitureObserver: Observer<Furniture> = {
+    next: (nextFurniture: Furniture) => this.furniture = nextFurniture,
+    error: err => this.furnitureCommonService.handleError(err),
+    complete: () => {
+    }
+  }
+
+  loadFurnitureByName(name: string): void {
+    this.furnitureService.getFurnitureByName(name).subscribe(this.furnitureObserver)
+  }
+
+  elementObserver: Observer<Element> = {
+    next: () => this.loadFurnitureByName(this.selectedFurnitureName),
+    error: err => this.furnitureCommonService.handleError(err),
+    complete: () => {
+    }
+  }
+
+  addElement() {
+    const furnitureName = this.selectedFurnitureName;
+    this.furnitureService.addElementToFurniture(furnitureName, this.newElement).subscribe(this.elementObserver);
+    this.newElement = new Element();
+  }
+
+  removeElement(index: number) {
+    const elementId = this.furniture.elements[index].uuid;
+    const furnitureName = this.selectedFurnitureName;
+    this.furnitureService.removeElementFromFurniture(furnitureName, elementId).subscribe(this.elementObserver);
   }
 }

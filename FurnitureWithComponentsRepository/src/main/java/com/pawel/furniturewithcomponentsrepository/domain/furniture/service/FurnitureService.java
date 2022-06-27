@@ -1,12 +1,12 @@
 package com.pawel.furniturewithcomponentsrepository.domain.furniture.service;
 
-import com.pawel.furniturewithcomponentsrepository.domain.common.exception.ObjectNotFoundException;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request.AddElementRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.controller.request.RemoveElementRequest;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.db.FurnitureRepo;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.ElementAlreadyExistException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureAlreadyExistsException;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.exceptions.FurnitureNotFoundException;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.Furniture;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class FurnitureService {
 
     public Furniture addElement(AddElementRequest request) {
         Furniture furniture = findFurnitureByName(request.getFurnitureName()).orElseThrow(
-                () -> new ObjectNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
+                () -> new FurnitureNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
 
         Element element = Element.builder()
                 .materialName(request.getMaterialName())
@@ -48,22 +48,14 @@ public class FurnitureService {
         return update(furniture);
     }
 
-    public Furniture removeElement(RemoveElementRequest request) {
+    public void removeElement(RemoveElementRequest request) {
         Furniture furniture = findFurnitureByName(request.getFurnitureName()).orElseThrow(
-                () -> new ObjectNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
-
-        Element element = Element.builder()
-                .materialName(request.getMaterialName())
-                .length(request.getLength())
-                .height(request.getHeight())
-                .thickness(request.getThickness())
-                .suffix(request.getSuffix())
-                .build();
-        furniture.removeElement(element);
-        return update(furniture);
+                () -> new FurnitureNotFoundException("Furniture with name: " + request.getFurnitureName() + " not found."));
+        furniture.removeElementByUuid(request.getElementUuid());
+        update(furniture);
     }
 
-    private Optional<Furniture> findFurnitureByName(String name) {
+    public Optional<Furniture> findFurnitureByName(String name) {
         return furnitureRepo.findByName(name);
     }
 
@@ -88,7 +80,7 @@ public class FurnitureService {
     public void removeFurnitureById(String id) {
         Objects.requireNonNull(id, "Furniture id must not be null for removing.");
         if (findFurnitureById(id).isEmpty()) {
-            throw new ObjectNotFoundException("Furniture with id: " + id + " not found.");
+            throw new FurnitureNotFoundException("Furniture with id: " + id + " not found.");
         }
         furnitureRepo.deleteById(id);
     }

@@ -13,9 +13,5 @@ import lombok.NoArgsConstructor;
 public class RemoveElementRequest {
 
     private String furnitureName;
-    private String materialName;
-    private int length;
-    private int height;
-    private int thickness;
-    private String suffix;
+    private String elementUuid;
 }

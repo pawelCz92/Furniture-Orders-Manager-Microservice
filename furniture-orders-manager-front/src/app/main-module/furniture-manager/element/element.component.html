@@ -6,8 +6,8 @@
     <div class="col-auto">
       <select class="form-select">
         <option selected disabled>MODEL</option>
-        <option *ngFor="let furniture of furnitureDtos let i = index" (click)="selectionChange(i);">
-          {{furniture?.name}}
+        <option *ngFor="let furnitureDto of furnitureDtos let i = index" (click)="selectionChange(i);">
+          {{furnitureDto?.name}}
         </option>
       </select>
     </div>
@@ -15,7 +15,7 @@
 
   <div class="col-5">
     <div class="row">
-      <table id="elements" class="table-bordered" *ngIf="selectedFurnitureId != ''">
+      <table id="elements" class="table-bordered" *ngIf="selectedFurnitureName != ''">
         <tr>
           <th>Materiał</th>
           <th>Długość</th>
@@ -25,20 +25,38 @@
           <th>Opis</th>
           <th>Akcja</th>
         </tr>
-        <ng-container *ngIf="furniture && furniture.elements.size > 0">
+        <ng-container *ngIf="furniture && furniture.elements.length > 0">
           <tr *ngFor="let element of furniture.elements; let i = index">
             <td>{{element?.materialName}}</td>
             <td>{{element?.length}}</td>
             <td>{{element?.height}}</td>
-            <td>{{element?.suffix}}</td>
             <td>{{element?.thickness}}</td>
             <td>{{element?.suffix}}</td>
             <td>{{element?.description}}</td>
-            <td></td>
+            <td><button class="btn-danger" (click)="removeElement(i)">X</button></td>
           </tr>
         </ng-container>
+        <tr>
+          <td><input type="text" [(ngModel)]="newElement.materialName" placeholder="Materiał"/></td>
+          <td><input type="number" min="1" [(ngModel)]="newElement.length"/></td>
+          <td><input type="number" min=1 [(ngModel)]="newElement.height"/></td>
+          <td><input type="number" min=1 [(ngModel)]="newElement.thickness"/></td>
+          <td><input type="text" [(ngModel)]="newElement.suffix" placeholder="Suffix"/></td>
+          <td><input type="text" [(ngModel)]="newElement.description" placeholder="Opis"/></td>
+          <td><Button class="btn-primary" (click)="addElement()">+</Button></td>
+        </tr>
       </table>
+
+      <div class="row">
+        <div class="col-auto">
       <pre>{{furniture | json}}</pre>
+        </div>
+        <div class="col-auto">
+          <pre>{{newElement | json}}</pre>
+        </div>
+
+      </div>
+
     </div>
   </div>
 

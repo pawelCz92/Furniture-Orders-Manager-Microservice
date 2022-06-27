@@ -1,6 +1,5 @@
-package com.pawel.furniturewithcomponentsrepository.domain.configurations.model;
+package com.pawel.furniturewithcomponentsrepository.domain.furniture.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.part.model.Part;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -15,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Configuration {
+public class FurnitureConfig {
 
     @EqualsAndHashCode.Include
     private String name;

@@ -1,8 +1,7 @@
 package com.pawel.furniturewithcomponentsrepository.domain.furniture.model;
 
-import com.pawel.furniturewithcomponentsrepository.domain.common.exception.ObjectNotFoundException;
-import com.pawel.furniturewithcomponentsrepository.domain.configurations.model.Configuration;
 import com.pawel.furniturewithcomponentsrepository.domain.element.model.Element;
+import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureDto;
 import com.pawel.furniturewithcomponentsrepository.domain.furniture.model.dto.FurnitureIdNameDescriptionDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Document(collection = "furniture")
@@ -31,8 +30,8 @@ public class Furniture {
 
     private String name;
     private String description;
-    private Set<Configuration> configurations;
-    private Set<Element> elements;
+    private Set<FurnitureConfig> furnitureConfigs = new HashSet<>();
+    private Set<Element> elements = new HashSet<>();
 
 
     @Override
@@ -70,5 +69,27 @@ public class Furniture {
                 .name(this.name)
                 .description(this.description)
                 .build();
+    }
+
+    public FurnitureDto toDto() {
+        return FurnitureDto.builder()
+                .name(this.name)
+                .description(this.description)
+                .furnitureConfigs(new HashSet<>(this.furnitureConfigs))
+                .elements(new HashSet<>(this.elements))
+                .build();
+    }
+
+    public void removeElementByUuid(String elementUuid) {
+        Objects.requireNonNull(elementUuid, "Element uuid must not be null.");
+        elements = elements.stream()
+                .filter(element -> !element.getUuid().equals(elementUuid))
+                .collect(Collectors.toSet());
+
+        //TODO verify if elements from parts are really removed
+        furnitureConfigs = furnitureConfigs.stream()
+                .peek(config ->
+                        config.getParts().forEach(part -> part.removeElementByUuid(elementUuid)))
+                .collect(Collectors.toSet());
     }
 }

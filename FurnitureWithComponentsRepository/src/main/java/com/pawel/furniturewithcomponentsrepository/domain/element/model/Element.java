@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 
 @Document(collection = "elements")
 @Builder
@@ -16,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode
 public class Element {
 
+    private String uuid = UUID.randomUUID().toString();
     private String materialName;
     private int length;
     private int height;

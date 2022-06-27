@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Material} from "../material/model/Material";
 
 @Component({
   selector: 'app-furniture-manager',
@@ -10,7 +9,6 @@ export class FurnitureComponent implements OnInit {
 
 
   elements!: Element[];
-  materials!: Material[]
 
   constructor() {
   }
